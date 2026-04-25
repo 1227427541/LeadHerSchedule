@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeadHER Women's Summit — Attendee List</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black: #1a1a1a;
+  --cream: #F0EEE5;
+  --purple: #5B4EEF;
+  --pink: #FFADAD;
+  --white: #ffffff;
+  --mid-gray: #6b6b6b;
+  --light-line: #E0DDD4;
+}
+
+body {
+  background: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  color: var(--black);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 48px 64px;
+}
+
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--black);
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--black);
+  line-height: 1.1;
+}
+.section-title span { color: var(--purple); }
+.attendee-count { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+.count-number { font-size: 40px; font-weight: 600; color: var(--purple); line-height: 1; }
+.count-label { font-size: 11px; font-weight: 400; color: var(--mid-gray); letter-spacing: 2px; text-transform: uppercase; }
+
+.controls {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 28px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.search-wrap { position: relative; flex: 1; min-width: 200px; max-width: 380px; }
+.search-wrap svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--mid-gray); pointer-events: none; }
+.search-input {
+  width: 100%;
+  padding: 10px 14px 10px 40px;
+  border: 1.5px solid var(--light-line);
+  border-radius: 8px;
+  background: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--black);
+  outline: none;
+  transition: border-color .2s;
+}
+.search-input:focus { border-color: var(--purple); }
+.search-input::placeholder { color: #aaa; }
+.filter-select {
+  padding: 10px 16px;
+  border: 1.5px solid var(--light-line);
+  border-radius: 8px;
+  background: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: var(--black);
+  cursor: pointer;
+  outline: none;
+  min-width: 180px;
+  transition: border-color .2s;
+}
+.filter-select:focus { border-color: var(--purple); }
+.results-info { font-size: 13px; color: var(--mid-gray); margin-left: auto; white-space: nowrap; }
+.results-info strong { color: var(--purple); }
+
+.table-wrap {
+  background: var(--white);
+  border-radius: 12px;
+  border: 1px solid var(--light-line);
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+}
+
+table { width: 100%; border-collapse: collapse; }
+
+thead th {
+  background: var(--black);
+  color: var(--white);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 14px 20px;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  transition: background .15s;
+}
+thead th:hover { background: #2e2e2e; }
+thead th .sort-arrow { display: inline-block; margin-left: 6px; opacity: 0.4; font-size: 10px; }
+thead th.sorted .sort-arrow { opacity: 1; color: var(--pink); }
+
+tbody tr { border-bottom: 1px solid #F0EDE5; transition: background .12s; }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: #faf9f5; }
+tbody tr:nth-child(even) { background: #FAFAF7; }
+tbody tr:nth-child(even):hover { background: #f5f4ef; }
+
+td { padding: 14px 20px; font-size: 14px; vertical-align: middle; }
+
+.td-name { min-width: 170px; }
+.name-full { font-weight: 500; color: var(--black); line-height: 1.2; }
+.name-initials {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  font-size: 12px; font-weight: 600;
+  color: var(--white);
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+.name-cell { display: flex; align-items: center; }
+.td-company { font-weight: 400; color: var(--black); min-width: 200px; font-size: 13px; }
+.td-title { color: var(--mid-gray); font-size: 12.5px; min-width: 180px; line-height: 1.35; }
+.td-email { font-size: 12px; color: var(--purple); white-space: nowrap; }
+.td-email a { color: var(--purple); text-decoration: none; }
+.td-email a:hover { text-decoration: underline; }
+
+.no-results { text-align: center; padding: 60px 20px; color: var(--mid-gray); font-size: 15px; }
+.no-results span { display: block; font-size: 32px; margin-bottom: 12px; opacity: .4; }
+
+.footer {
+  background: var(--black);
+  padding: 20px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-left { font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: 1px; text-transform: uppercase; }
+.footer-right { font-size: 11px; color: rgba(255,255,255,0.35); }
+
+/* ── MOBILE ── */
+@media (max-width: 640px) {
+  .main { padding: 20px 16px 40px; }
+  .section-header { margin-bottom: 20px; padding-bottom: 16px; }
+  .section-title { font-size: 26px; }
+  .count-number { font-size: 28px; }
+  .count-label { font-size: 9px; letter-spacing: 1px; }
+  .controls { flex-direction: column; align-items: stretch; gap: 10px; margin-bottom: 16px; }
+  .search-wrap { max-width: 100%; min-width: 0; }
+  .search-input { font-size: 16px; }
+  .filter-select { width: 100%; min-width: 0; font-size: 16px; }
+  .results-info { margin-left: 0; text-align: center; }
+  .footer { padding: 16px 20px; flex-direction: column; align-items: flex-start; gap: 4px; }
+  .table-wrap { border-radius: 10px; }
+  thead { display: none; }
+  table, tbody, tr, td { display: block; width: 100%; }
+  tbody tr { padding: 14px 16px; border-bottom: 1px solid #EDEAE0; }
+  tbody tr:nth-child(even) { background: #FAFAF7; }
+  td.td-name { padding: 0 0 6px 0; min-width: unset; }
+  .name-initials { width: 30px; height: 30px; font-size: 11px; margin-right: 8px; }
+  .name-full { font-size: 15px; }
+  td.td-company { padding: 0 0 3px 38px; font-size: 13px; font-weight: 500; min-width: unset; }
+  td.td-title { padding: 0 0 6px 38px; font-size: 12px; min-width: unset; }
+  td.td-email { padding: 0 0 0 38px; font-size: 12px; white-space: normal; word-break: break-all; }
+}
+
+@media print {
+  .controls { display: none; }
+  body { background: white; }
+  .table-wrap { box-shadow: none; border: 1px solid #ddd; }
+}
+</style>
+</head>
+<body>
+
+<div class="main">
+  <div class="section-header">
+    <div class="section-title">Attendee <span>Directory</span></div>
+    <div class="attendee-count">
+      <div class="count-number" id="totalCount">171</div>
+      <div class="count-label">Registered Attendees</div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="search-wrap">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input class="search-input" type="text" id="searchInput" placeholder="Search name, company, or title…" oninput="filterTable()">
+    </div>
+    <select class="filter-select" id="companyFilter" onchange="filterTable()">
+      <option value="">All Companies</option>
+    </select>
+    <span class="results-info" id="resultsInfo">Showing <strong>171</strong> of 171</span>
+  </div>
+
+  <div class="table-wrap">
+    <table id="attendeeTable">
+      <thead>
+        <tr>
+          <th onclick="sortTable('name')" id="th-name">Name <span class="sort-arrow">↕</span></th>
+          <th onclick="sortTable('company')" id="th-company">Company <span class="sort-arrow">↕</span></th>
+          <th onclick="sortTable('title')" id="th-title">Title <span class="sort-arrow">↕</span></th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody id="attendeeBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-left">LeadHER Women's Summit &middot; June 2–4, 2026 &middot; Philadelphia</div>
+  <div class="footer-right">Confidential &mdash; For Internal Use Only</div>
+</div>
+
+<script>
+const ATTENDEES = [{"first":"Samar","last":"Abdourahman","company":"DLL","title":"Global Content Manager, LifeTech","email":"samar.abdourahman@dllgroup.com"},{"first":"Jana","last":"Ahlers","company":"CoBank Farm Credit Leasing","title":"Manager- Inside Sales","email":"jahlers@cobank.com"},{"first":"Lori","last":"Anderson","company":"GreatAmerica","title":"Director, Finance","email":"landerson@greatamerica.com"},{"first":"Susie","last":"Angelucci","company":"Monitor","title":"Director of Advertising","email":"susie.angelucci@monitordaily.com"},{"first":"Lauren","last":"Aron","company":"LEAF","title":"SVP, Marketing","email":"laron@leafnow.com"},{"first":"Debra","last":"Babu","company":"Darcy & Devassy PC","title":"Partner","email":"ddevassy@darcydevassy.com"},{"first":"Laura","last":"Backe","company":"RAM Group Holdings","title":"Assistant Editor","email":"laura.backe@monitordaily.com"},{"first":"Christy","last":"Bader","company":"1st Source Bank","title":"Relationship Sales Officer","email":"baderc@1stsource.com"},{"first":"Isabelle","last":"Barbeau","company":"Mitsubishi HC Capital Canada","title":"VP Digital Transformation","email":"ibarbeau@mhccna.com"},{"first":"Cady","last":"Bate","company":"Commercial Capital Company","title":"Director of Loan Operations and Legal Compliance","email":"cbate@ccckc.com"},{"first":"Jenn","last":"Bello","company":"DLL","title":"Head of Global Strategic Marketing, Digital and CX, Soft Assets","email":"jennifer.bello@dllgroup.com"},{"first":"Dondra","last":"Benjamin","company":"EverBank","title":"Vice President","email":"dondra.benjamin@everbank.com"},{"first":"Kathleen","last":"Berryman","company":"Ansley Park Capital, an Ares Capital Management Company","title":"Managing Director","email":"kathleen.berryman@ansleyparkcapital.com"},{"first":"Hilary","last":"Bilbrey","company":"HB Inspires LLC","title":"Speaker and Author","email":"hilary@bilbrey.me"},{"first":"Zamane","last":"Bodini","company":"Clarus Capital","title":"Director, Sponsor Coverage","email":"zbodini@claruscap.com"},{"first":"Lindsay","last":"Bohon","company":"GreatAmerica","title":"VP, Corporate Sales Operations","email":"lbohon@greatamerica.com"},{"first":"Miranda","last":"Borgemoen","company":"DLL Group","title":"Sales Rep","email":"miranda.borgemoen@dllgroup.com"},{"first":"Sam","last":"Borgeson","company":"DLL","title":"Apple Sales Manager","email":"sborgeson@leasedirect.com"},{"first":"Dana","last":"Bota","company":"Mitsubishi HC Capital Canada","title":"VP North American Compliance Officer","email":"dbota@mhcna.com"},{"first":"Terri","last":"Boyer","company":"Anne Welsh McNulty Institute","title":"Founding Director","email":"Teresa.boyer@villanova.edu"},{"first":"Jess","last":"Brick","company":"Trans Lease Inc.","title":"Director of Technology","email":"jess.brick@transleaseinc.com"},{"first":"Rachel","last":"Brooks","company":"Fifth Third Bank","title":"Portfolio Manager","email":"rachel.brooks@53.com"},{"first":"Katrina","last":"Bryson","company":"De Lage Landen Financial","title":"Account Manager","email":"kbryson@leasedirect.com"},{"first":"Hollis","last":"Bufferd","company":"Star Hill","title":"CEO","email":"hbufferd@starhillfin.com"},{"first":"Kim","last":"Bush","company":"Key Equipment Finance","title":"SVP, Team Leader Originations","email":"Kim.L.Bush@leasingcentral.com"},{"first":"Susan","last":"Campbell","company":"STRIPES Leadership Program","title":"Program Ambassador","email":"susan.campbell@stripesleadership.com"},{"first":"Katie","last":"Cancio","company":"DLL","title":"Operational Risk Manager","email":"kcancio@leasedirect.com"},{"first":"Carolynn","last":"Caruso","company":"STRIPES Leadership Program","title":"SVP, Sales and Program Leader","email":"carolynn.caruso@stripesleadership.com"},{"first":"Aimee","last":"Cessna","company":"U.S. Bank Equipment Finance","title":"VP, Director of Operations","email":"aimee.cessna@usbank.com"},{"first":"Katy","last":"Chan","company":"Northteq","title":"Director, Professional Services","email":"kchan@northteq.com"},{"first":"Christina","last":"Clarkson","company":"instaCOVER, a subsidiary of One80 Intermediaries","title":"Manager, Business Development","email":"christina.clarkson@instacover.com"},{"first":"Krista","last":"Clemente","company":"Wintrust Commercial Finance","title":"Senior Transactions Analyst","email":"kclement@wintrust.com"},{"first":"Katharine","last":"Converse","company":"First Commonwealth Equipment Finance","title":"Vice President, Sales","email":"kconverse@fcbanking.com"},{"first":"Raquel","last":"Cormier","company":"RAM Group Holdings","title":"Sales Support","email":"raquel.cormier@monitordaily.com"},{"first":"Kylee","last":"Cormier","company":"RAM Group Holdings","title":"Marketing Coordinator","email":"kylee.cormier@monitordaily.com"},{"first":"Emily","last":"Cross","company":"Canon Financial Services, Inc.","title":"Collections Supervisor","email":"ecross@cfs.canon.com"},{"first":"Abigail","last":"Dalton","company":"Canon Financial Services, Inc.","title":"Manager, Operational Accounting","email":"afitchett@cfs.canon.com"},{"first":"Kristi","last":"Darlington","company":"instaCOVER, a subsidiary of One80 Intermediaries","title":"Director, Business Development","email":"kristi.darlington@instacover.com"},{"first":"Sydney","last":"Daun","company":"DLL","title":"Account Manager, Retail","email":"sdaun@leasedirect.com"},{"first":"Blair","last":"Dawson","company":"North Mill Equipment Finance","title":"Chief Marketing Officer","email":"bdawson@nmef.com"},{"first":"Carmen","last":"Delfi","company":"M&T Commercial Equipment Finance","title":"SVP Transaction Management","email":"cdelfi@mtb.com"},{"first":"Laura","last":"Dionisio","company":"DLL","title":"Marketing Manager, Construction Transportation and Industrial","email":"laura.dionisio@dllgroup.com"},{"first":"Danielle","last":"Dolloff","company":"Liventus","title":"SVP","email":"ddolloff@liventus.com"},{"first":"Traci","last":"Dolphin","company":"Commercial Funding Partners","title":"President","email":"tdolphin@com-funding.com"},{"first":"Allison","last":"Domowitch","company":"Fleischer, Suglia, Dopke & Domowitch, P.C.","title":"Shareholder","email":"adomowitch@fleischerlaw.com"},{"first":"Karen","last":"Dowling","company":"990 Capital Management Corp.","title":"Managing Director","email":"karen.dowling@990capital.com"},{"first":"Eadie","last":"Eberhardt","company":"DLL","title":"Director, Shared Services Operations","email":"eadie.eberhardt@dllgroup.com"},{"first":"Jennifer","last":"Eddy","company":"Clarus Capital","title":"Vice President, Investment Operations","email":"jeddy@claruscap.com"},{"first":"Jessica","last":"Edelist","company":"Dakota Financial LLC","title":"Director of Human Resources","email":"jessica@dakotafin.com"},{"first":"Tina","last":"Eickhoff","company":"U.S. Bank Equipment Finance","title":"SVP, Head of Equipment Finance","email":"tina.eickhoff@usbank.com"},{"first":"Amanda","last":"Esposito","company":"Canon Financial Services, Inc.","title":"Director, Risk Department","email":"aesposito@cfs.canon.com"},{"first":"Suzann","last":"Fakhoury","company":"Crossroads Equipment Lease and Finance","title":"VP of Operations","email":"sfakhoury@crlease.com"},{"first":"Jennifer","last":"Fanz","company":"PEAC Solutions","title":"Vice President of Sales","email":"jfanz@peacsolutions.com"},{"first":"Lesley","last":"Farmer","company":"KLC Financial","title":"Business Development","email":"lesley@klcfinancial.com"},{"first":"Susan","last":"Ferencak","company":"Wintrust Commercial Finance","title":"Senior Operations Analyst","email":"sferenca@wintrust.com"},{"first":"Lisa","last":"Fleischer","company":"DLL","title":"U.S. Chief Legal Officer","email":"lfleischer@leasedirect.com"},{"first":"Vanessa","last":"Flick","company":"DLL","title":"Digital Services Engineering Director","email":"vanessa.flick@dllgroup.com"},{"first":"Lori","last":"Frasier","company":"BrightPath Workforce Strategies","title":"Founder & Principal","email":"lori@brightpathahead.com"},{"first":"Heather","last":"Friedman","company":"GreatAmerica","title":"VP, Corporate Marketing","email":"HFriedman@greatamerica.com"},{"first":"Jennifer","last":"Gadbury","company":"GreatAmerica","title":"Director, Program Management","email":"JGadberry@greatamerica.com"},{"first":"Christina","last":"Galvano","company":"Canon Financial Services, Inc.","title":"Manager, Sales Support","email":"cgalvano@cfs.canon.com"},{"first":"Rita","last":"Garwood","company":"Monitor","title":"Editor in Chief","email":"rita.garwood@monitordaily.com"},{"first":"Michele","last":"Giordano","company":"PEAC Solutions","title":"Chief Information Officer","email":"MGiordano@peacsolutions.com"},{"first":"Brenda","last":"Gonet","company":"SCJ Commercial Financial Services","title":"Collections Manager","email":"brendag@scjinc.net"},{"first":"Donna","last":"Hamel","company":"DEXT Capital, LLC","title":"SVP Capital Markets","email":"donna.hamel@dextcapital.com"},{"first":"Monica","last":"Harper","company":"AACFB","title":"Executive Director","email":"mharper@hqtrs.com"},{"first":"Emily","last":"Haugen","company":"Channel","title":"Sr. HR Generalist","email":"emily.haugen@channelpartnersllc.com"},{"first":"Jaimie","last":"Haver","company":"Blue Street Capital, LLC","title":"COO","email":"jaimie@bluestreetcapital.com"},{"first":"Kathy","last":"Havlik","company":"Key Equipment Finance","title":"SVP, Regional Sales Director","email":"kathy.a.havlik@key.com"},{"first":"Kirsten","last":"Hawkins","company":"SCJ Commercial Financial Services","title":"Director of Sales & Marketing","email":"kirstenh@scjinc.net"},{"first":"Saima","last":"Hawley","company":"KLC Financial","title":"Controller","email":"saima@klcfinancial.com"},{"first":"Alyse","last":"Hayes","company":"DLL","title":"Senior Legal Counsel","email":"awhitehayes@leasedirect.com"},{"first":"Mikki","last":"Henkelman","company":"Oakmont Capital Services","title":"Vice President, Credit & Risk","email":"mhenkelman@oakmontfinance.com"},{"first":"Christina","last":"Hetelekides","company":"M&T Commercial Equipment Finance","title":"Contract & Transaction Manager","email":"cohetelekides@mtb.com"},{"first":"Lisa","last":"Holland","company":"LTi Technology Solutions","title":"VP, Finance & Accounting","email":"lholland@ltisolutions.com"},{"first":"Diana","last":"Horm","company":"Canon Financial Services, Inc.","title":"Collections Representative II","email":"dhart@cfs.canon.com"},{"first":"Theresa","last":"Kabot","company":"Kabot Commercial Leasing LLC","title":"Founder","email":"tkabot@lease-it.com"},{"first":"Jacqueline","last":"Kelly","company":"Canon Financial Services, Inc.","title":"Sr. Tax Accountant","email":"jkelly@cfs.canon.com"},{"first":"Tiffany","last":"Kelly","company":"Canon Financial Services, Inc.","title":"Advisor, Quality Monitoring","email":"tkelly@cfs.canon.com"},{"first":"Alycia","last":"Kenney Montero","company":"PEAC Solutions","title":"Deputy General Counsel","email":"AKenneyMontero@peacsolutions.com"},{"first":"Kim","last":"King","company":"Odessa","title":"Senior Account Manager","email":"kim.king@odessainc.com"},{"first":"Courtney","last":"Koslosky","company":"PEAC Solutions","title":"Partner Success Manager","email":"CKoslosky@peacsolutions.com"},{"first":"Lana","last":"Kralik","company":"Dext Capital, LLC","title":"Sr. Director of Operations, SVP","email":"lana.kralik@dextcapital.com"},{"first":"Ana","last":"Lage","company":"Eastern Funding LLC","title":"VP, Operations","email":"Ana.Lage@easternfunding.com"},{"first":"Mariama","last":"Larson","company":"Channel Partners","title":"Senior Treasury Cash & Capital Markets Manager","email":"Mariama.Larson@channelpartnersllc.com"},{"first":"Lori","last":"Leavey","company":"First Financial Equipment Leasing","title":"Vice President Marketing & Communications","email":"lleavey@ffequipmentleasing.com"},{"first":"Amy","last":"Lewis","company":"KLC Financial","title":"Chief Operating Officer","email":"amy@klcfinancial.com"},{"first":"Renee","last":"Lincoln","company":"1st Source Bank","title":"Relationship Sales Officer","email":"lincolnr@1stsource.com"},{"first":"Elise","last":"Linn","company":"Oakmont Capital Services","title":"Vice President, Strategic Partnerships","email":"elinn@oakmontfinance.com"},{"first":"Shari","last":"Lipski","company":"ECS Financial Services, Inc.","title":"Principal","email":"slipski@ecsfinancial.com"},{"first":"Sharon","last":"Long","company":"RAM Group Holdings","title":"Sales Coordinator","email":"sharon.long@monitordaily.com"},{"first":"Elizabeth","last":"Lutes","company":"RVI Group","title":"Executive Vice President","email":"elutes@rvigroup.com"},{"first":"Kate","last":"Lyon","company":"GreatAmerica","title":"VP, Customer Originations Enablement","email":"klyon@greatamerica.com"},{"first":"Lillian","last":"Macaskill","company":"Clarus Capital","title":"Analyst, Investment Management","email":"lmacaskill@claruscap.com"},{"first":"Jacklynn","last":"Manning","company":"Navitas Credit Corp","title":"CMO","email":"JManning@navitascredit.com"},{"first":"Megan","last":"Marett","company":"Canon Financial Services, Inc.","title":"Accounting Manager","email":"meganmarett12@yahoo.com"},{"first":"Rebecca","last":"Masserini-Cooper","company":"NewLane Finance","title":"Director of Credit - Broker Services","email":"rmasserini-cooper@newlanefinance.com"},{"first":"Kristina","last":"Matkowsky","company":"North Mill Equipment Finance","title":"SVP Customer Operations","email":"kristina.matkowsky@icloud.com"},{"first":"Megan","last":"Mccabe","company":"RAM Group Holdings","title":"Intern","email":"megan.mccabe@monitordaily.com"},{"first":"Nicole","last":"Mccormick","company":"LEAF Commercial Capital, Inc.","title":"VP, Customer & Dealer Service","email":"nmccormick@leafnow.com"},{"first":"Nicole","last":"Miller","company":"NewLane Finance","title":"Sr. Business Development Manager of Broker Services","email":"nmiller@newlanefinance.com"},{"first":"Casey","last":"Mills","company":"ElmBlue Capital, LLC","title":"AVP, Sales Support","email":"casey.mills@elmblue.com"},{"first":"Elaine","last":"Monti","company":"Canon Financial Services, Inc.","title":"Sale Support Representative III","email":"emonti@cfs.canon.com"},{"first":"Sonya","last":"Morlock-Ryals","company":"Gordon Brothers Commercial Equipment Finance","title":"Managing Director","email":"smorlockryals@gordonbrothers.com"},{"first":"Terri","last":"Morse","company":"Palo Alto Networks Financial Services","title":"Director, North America","email":"temorse@paloaltonetworks.com"},{"first":"Safiyyah","last":"Muhammad","company":"Channel","title":"VP of Funding","email":"safiyyah.muhammad@channelpartnersllc.com"},{"first":"Katie","last":"Mullin","company":"Mitsubishi HC Capital America, Inc.","title":"VP, NA Marketing Communications","email":"kmullin@mhccna.com"},{"first":"Terry","last":"Mulreany","company":"RAM Group Holdings","title":"Director of Customer Service, Circulation and Sales Support","email":"terry.mulreany@monitordaily.com"},{"first":"Ann","last":"Myers","company":"LTi Technology Solutions","title":"Release Manager","email":"amyers@ltisolutions.com"},{"first":"Jennifer","last":"Ng","company":"Eastern Funding LLC","title":"General Counsel","email":"Jennifer.Ng@easternfunding.com"},{"first":"Kim","last":"Nugent","company":"North Mill Equipment Finance","title":"Vice President of Collections","email":"knugent@nmef.com"},{"first":"Katie","last":"O'Mara","company":"First Commonwealth Equipment Finance","title":"Acq. & Syndications Officer","email":"komara@fcbanking.com"},{"first":"Ozlem","last":"Ozcan","company":"Kapitus Inc.","title":"VP of Treasury","email":"oozcan@kapitus.com"},{"first":"Amy","last":"Pagano","company":"Canon Financial Services, Inc.","title":"Sr. Director, Human Resources","email":"apagano@cfs.canon.com"},{"first":"Elizabeth","last":"Palmer","company":"DLL","title":"Global Head of Strategic Marketing - CF","email":"elizabeth.palmer@dllgroup.com"},{"first":"Tina","last":"Paparone Ferguson","company":"PEAC Solutions","title":"Director of Marketing","email":"TPaparone@peacsolutions.com"},{"first":"Rene","last":"Paradis","company":"Auxilior Capital Partners","title":"President & COO","email":"rparadis@auxcap.com"},{"first":"Alex","last":"Patterson","company":"Commercial Capital Company","title":"Director of Marketing","email":"apatterson@ccckc.com"},{"first":"Justene","last":"Patton","company":"Canon Financial Services, Inc.","title":"Sales Support Manager","email":"justpatton@cfs.canon.com"},{"first":"Kayla","last":"Perlinger","company":"AP Equipment Financing","title":"SVP Syndications & Risk","email":"kperlinger@apfinancing.com"},{"first":"Michelle","last":"Perritt","company":"DLL","title":"Account Manager, Commercial Finance","email":"michelle.perritt@dllgroup.com"},{"first":"Kristy","last":"Phillips","company":"Commercial Funding Partners","title":"EVP of Documentation","email":"kphillips@com-funding.com"},{"first":"Keara","last":"Piekanski","company":"Oakmont Capital Services","title":"Vice President, Marketing & Communications","email":"kpiekanski@oakmontfinance.com"},{"first":"Alexandrea","last":"Piwonski","company":"M&T Commercial Equipment Finance","title":"CEF Transaction Analyst","email":"arambali@mtb.com"},{"first":"Catherine","last":"Podlesny","company":"PEAC Solutions","title":"VP of Human Resources","email":"CPodlesny@peacsolutions.com"},{"first":"Falencia","last":"Prime","company":"Eastern Funding LLC","title":"Chief Operating Officer","email":"falencia.prime@easternfunding.com"},{"first":"Erin","last":"Rafter","company":"STRIPES Leadership Program","title":"Program Manager","email":"erin.rafter@stripesleadership.com"},{"first":"Linda","last":"Redding","company":"JPMorgan","title":"Head of Equipment Finance","email":"linda.redding@jpmorgan.com"},{"first":"Laura","last":"Reed","company":"SCJ Commercial Financial Services","title":"Business Development","email":"laurar@scjinc.net"},{"first":"Deborah","last":"Reuben","company":"TomorrowZone","title":"CEO & Founder","email":"deborah@tomorrowzone.io"},{"first":"Martina","last":"Rider Porter","company":"Hemar, Rousso & Heald, LLP","title":"Partner","email":"mriderporter@hrhlaw.com"},{"first":"Nancy","last":"Robles","company":"Eastern Funding LLC","title":"President and CEO","email":"Nancy.Robles@easternfunding.com"},{"first":"Maria","last":"Sanchez","company":"Wintrust Commercial Finance","title":"Senior Operations Analyst","email":"msanche4@wintrust.com"},{"first":"Nilka","last":"Sang","company":"Wintrust Commercial Finance","title":"Transactions Analyst","email":"nsang@wintrust.com"},{"first":"Andrea","last":"Santoro","company":"DLL","title":"Senior Manager Tax Technology","email":"andrea.santoro@dllgroup.com"},{"first":"Jaclyn","last":"Scarduzio Dopke","company":"Fleischer, Suglia, Dopke & Domowitch, P.C.","title":"Shareholder","email":"jdopke@fleischerlaw.com"},{"first":"Lisa","last":"Schafer-Stevenson","company":"SCJ Commercial Financial Services","title":"Accounting Manager","email":"lstevenson@scjinc.net"},{"first":"Kristi","last":"Schon","company":"Channel","title":"Chief Marketing Officer","email":"kristi.schon@channelpartnersllc.com"},{"first":"Eileen","last":"Schoonmaker","company":"PEAC Solutions","title":"President of the Americas","email":"ESchoonmaker@peacsolutions.com"},{"first":"Anne-Sophie","last":"Sedillot","company":"Mitsubishi HC Capital Canada","title":"VP North America Customer Experience","email":"asedillot@mhccna.com"},{"first":"Mary","last":"Sharp","company":"Key Equipment Finance","title":"SVP, Team Leader Originations","email":"mary.sharp@keybank.com"},{"first":"Colleen","last":"Shelby","company":"instaCOVER, a subsidiary of One80 Intermediaries","title":"CEO","email":"colleen.shelby@instacover.com"},{"first":"Karen","last":"Shields","company":"PEAC Solutions","title":"SVP and General Counsel","email":"KShields@peacsolutions.com"},{"first":"Julie","last":"Shortell","company":"Canon Financial Services, Inc.","title":"Coordinator, Doc Review III","email":"jshortell@cfs.canon.com"},{"first":"Victoria","last":"Sims","company":"Canon Financial Services, Inc.","title":"Sr. Technical Trainer","email":"vsims@cfs.canon.com"},{"first":"Indira","last":"Singh","company":"Canon Financial Services, Inc.","title":"Sr. Specialist, Communications","email":"isingh@cfs.canon.com"},{"first":"Hedy","last":"Sirico","company":"RAM Group Holdings","title":"Production Manager","email":"hedysirico@gmail.com"},{"first":"Marci","last":"Slagle","company":"BankFinancial, NA","title":"President","email":"Mslagle@bankfinancial.com"},{"first":"Erin","last":"Smith","company":"Dakota Financial LLC","title":"Operations","email":"erin@dakotafin.com"},{"first":"Nakeysha","last":"Snead","company":"First Citizens Bank","title":"Vice President, Customer Service","email":"nakeysha.snead@firstcitizens.com"},{"first":"Michelle","last":"Speranza","company":"LEAF Commercial Capital, Inc.","title":"EVP, Chief Marketing Officer","email":"msperanza@leafnow.com"},{"first":"Tawnya","last":"Stone","company":"GreatAmerica","title":"VP, Strategic Technology","email":"TStone@greatamerica.com"},{"first":"Kim","last":"Sweeney","company":"Canon Financial Services, Inc.","title":"Manager, Bid Review & Contracts","email":"ksweeny@cfs.canon.com"},{"first":"Shelly","last":"Tauer","company":"U.S. Bank Equipment Finance","title":"SVP, Head of EF Product Management & Strategic Initiatives","email":"shelly.tauer@usbank.com"},{"first":"Meredith","last":"Thomas","company":"1st Source Bank","title":"Operations Manager","email":"thomasme@1stsource.com"},{"first":"Shanna","last":"Tiayon","company":"Yes Wellbeing Works","title":"Social Psychologist","email":"sbt@yeswellbeingworks.com"},{"first":"Linda","last":"Tiers","company":"Baystone Government Finance","title":"Vice President","email":"ltiers@ksstate.bank"},{"first":"Peggy","last":"Tomcheck","company":"Aspen Capital Company, Inc.","title":"CEO","email":"ptomcheck@aspencapitalcompany.com"},{"first":"Sandy","last":"Van Oostendorp","company":"Canon Financial Services, Inc.","title":"Sr. Tax Accountant","email":"svanoostendorp@cfs.canon.com"},{"first":"Mari","last":"Vasquez","company":"DLL","title":"Digital & Product Management Lead, US Transformation","email":"mariane.vasquez@dllgroup.com"},{"first":"Madison","last":"Walley","company":"DLL","title":"Income Tax Manager","email":"mwalley@leasedirect.com"},{"first":"Jamie","last":"Walsh","company":"Canon Financial Services, Inc.","title":"Documentation Manager","email":"walsja02@gmail.com"},{"first":"Winnie","last":"Wang","company":"DLL","title":"Legal Director","email":"wwang@leasedirect.com"},{"first":"Wendi","last":"Wasik","company":"Wasik Consulting","title":"Founder & CEO","email":"wendi@wasikconsulting.com"},{"first":"Monica","last":"Waters","company":"Dakota Financial LLC","title":"Customer Relations Manager","email":"mwaters@dakotafin.com"},{"first":"Amy","last":"Weum","company":"CoBank Farm Credit Leasing","title":"Regional Vice President","email":"aweum@cobank.com"},{"first":"Abby","last":"Windley","company":"DLL","title":"Director of Collections & Recovery Outsourcing","email":"abigail.windley@dllgroup.com"},{"first":"Tara","last":"Wood","company":"Wintrust Commercial Finance","title":"Operations Supervisor","email":"twood@wintrust.com"},{"first":"Donna","last":"Yanuzzi","company":"1st Equipment Finance, Inc.","title":"EVP Division Head","email":"donna.yanuzzi@psbt.com"},{"first":"Nahid","last":"Zamir","company":"Meridian OneCap","title":"Head of Operations & Transformation","email":"nahid.zamir@meridianonecap.ca"},{"first":"Christa","last":"Zodda","company":"Canon Financial Services, Inc.","title":"Sr. Tax Accountant","email":"czodda@cfs.canon.com"}];
+
+const AVATAR_COLORS = ['#5B4EEF','#1a1a1a','#7B6FF0','#3D348B','#8E44AD','#2C3E50','#6C5CE7','#4A235A','#9B59B6','#2E4057'];
+function getColor(name) { let h=0; for (let c of name) h=c.charCodeAt(0)+((h<<5)-h); return AVATAR_COLORS[Math.abs(h)%AVATAR_COLORS.length]; }
+function initials(f,l) { return ((f[0]||'')+(l[0]||'')).toUpperCase(); }
+
+const companies = [...new Set(ATTENDEES.map(a=>a.company).filter(Boolean))].sort();
+const sel = document.getElementById('companyFilter');
+companies.forEach(c => { const o=document.createElement('option'); o.value=c; o.textContent=c; sel.appendChild(o); });
+
+let currentSort = { col:'name', dir:1 };
+let filtered = [...ATTENDEES];
+
+function renderTable(data) {
+  const tbody = document.getElementById('attendeeBody');
+  tbody.innerHTML = '';
+  if (!data.length) {
+    tbody.innerHTML = '<tr><td colspan="4" class="no-results"><span>🔍</span>No attendees match your search.</td></tr>';
+    return;
+  }
+  data.forEach(a => {
+    const tr = document.createElement('tr');
+    const color = getColor(a.first+a.last);
+    tr.innerHTML = `
+      <td class="td-name"><div class="name-cell">
+        <span class="name-initials" style="background:${color}">${initials(a.first,a.last)}</span>
+        <span class="name-full">${a.first} ${a.last}</span>
+      </div></td>
+      <td class="td-company">${a.company||'—'}</td>
+      <td class="td-title">${a.title||'—'}</td>
+      <td class="td-email"><a href="mailto:${a.email}">${a.email||'—'}</a></td>`;
+    tbody.appendChild(tr);
+  });
+  document.getElementById('resultsInfo').innerHTML = `Showing <strong>${data.length}</strong> of ${ATTENDEES.length}`;
+  document.getElementById('totalCount').textContent = data.length===ATTENDEES.length ? ATTENDEES.length : data.length;
+}
+
+function filterTable() {
+  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  const co = document.getElementById('companyFilter').value;
+  filtered = ATTENDEES.filter(a => {
+    const full = `${a.first} ${a.last} ${a.company} ${a.title} ${a.email}`.toLowerCase();
+    return (!q||full.includes(q)) && (!co||a.company===co);
+  });
+  sortAndRender();
+}
+
+function sortTable(col) {
+  if (currentSort.col===col) currentSort.dir*=-1;
+  else { currentSort.col=col; currentSort.dir=1; }
+  document.querySelectorAll('thead th').forEach(th=>th.classList.remove('sorted'));
+  document.getElementById(`th-${col}`).classList.add('sorted');
+  document.querySelector(`#th-${col} .sort-arrow`).textContent = currentSort.dir===1?'↑':'↓';
+  sortAndRender();
+}
+
+function sortAndRender() {
+  const {col,dir} = currentSort;
+  filtered.sort((a,b) => {
+    let va = col==='name'?`${a.last} ${a.first}`:a[col]||'';
+    let vb = col==='name'?`${b.last} ${b.first}`:b[col]||'';
+    return va.localeCompare(vb)*dir;
+  });
+  renderTable(filtered);
+}
+
+renderTable(ATTENDEES);
+</script>
+</body>
+</html>
